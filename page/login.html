@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="login.js"></script>
+    <script>
+        function login() {
+            var stuBirth = document.getElementById("stuBirth").value;
+            var password = document.getElementById("password").value;
+
+            var params = "stuBirth=" + stuBirth + "&password=" + password;
+            //get请求
+            // xmlHttp=new XMLHttpRequest();
+            // xmlHttp.open("GET","/login?" + params,true);
+            // xmlHttp.send(null);
+            // xmlHttp.onreadystatechange=function () {
+            //     if (xmlHttp.readyState ==4 && xmlHttp.status ==200){
+            //         console.log(xmlHttp.responseText);
+            //         console.log(typeof xmlHttp.responseText);
+            //         if(xmlHttp.responseText == "OK"){
+            //             alert("成功");
+            //         }else{
+            //             alert("失败");
+            //         }
+            //     }
+            // }
+
+            //post请求
+            xmlHttp=new XMLHttpRequest();
+            xmlHttp.open("POST","/login",true);
+            xmlHttp.send(params);
+            xmlHttp.onreadystatechange=function () {
+                if (xmlHttp.readyState ==4 && xmlHttp.status ==200){
+                    console.log(xmlHttp.responseText);
+                    console.log(typeof xmlHttp.responseText);
+                    if(xmlHttp.responseText == "OK"){
+                        // alert("成功");
+                        // location.href="/main.html";
+                    }else{
+                        // alert("失败");
+                        // location.href="/error.html";
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    <form method="post" action="/login">
+        <input type="text" name="stuBirth" placeholder="用户名" id="stuBirth">
+        <input type="password" name="password" placeholder="密码" id="password">
+        <input type="submit" value="提交" onclick="login()">
+    </form>
+
+</body>
+</html>
